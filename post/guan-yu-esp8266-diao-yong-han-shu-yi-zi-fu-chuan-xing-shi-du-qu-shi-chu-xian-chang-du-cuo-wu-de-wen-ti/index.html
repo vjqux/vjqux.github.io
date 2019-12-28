@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gridea</title>
+<title>关于ESP8266调用函数以字符串形式读取时出现长度错误的问题 | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://kudoes.coding.me/favicon.ico?v=1577558736166">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -70,65 +70,71 @@
   </div>
 </div>
 
-    
-        <div class="post-container">
-  
-    <article class="post">
-      <a href="https://kudoes.coding.me/post/about">
-        <h2 class="post-title">关于</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2019-01-25
-        </span>
-        <span>
-          1 min read
-        </span>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://kudoes.coding.me/post/hello-gridea">
-        <h2 class="post-title">Hello Gridea</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2018-12-12
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://kudoes.coding.me/tag/1bMrly8z_" class="post-tag">
-            # Gridea
-          </a>
-        
-      </div>
-      
-        <a href="https://kudoes.coding.me/post/hello-gridea" class="post-feature-image" style="background-image: url('https://kudoes.coding.me/post-images/hello-gridea.png')">
-        </a>
-      
-      <div class="post-abstract">
-        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              关于ESP8266调用函数以字符串形式读取时出现长度错误的问题
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-12-29
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="发现问题的契机">发现问题的契机</h1>
+<p>在初次开发ESP8266的过程中，为了保存WIFI信息的方便，使用了RTOS3.0的NVS相关函数进行NVS的读写操作。<br>
+在使用过程中发现如果针对给定的字符类型的数据，写入操作返回成功后进行读取会报长度错误<strong>ESP_ERR_NVS_INVALID_LENGTH</strong>，此错误的解释是读取的字符串和存储的长度不一致</p>
+<h1 id="对错误提示的摸索与深究">对错误提示的摸索与深究</h1>
+<p>错误提示让我把关注点引到了字符串的数据长度上来，于是乎在后续几次实验中</p>
 
-      </div>
-    </article>
-  
-</div>
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%A5%91%E6%9C%BA">发现问题的契机</a></li>
+<li><a href="#%E5%AF%B9%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA%E7%9A%84%E6%91%B8%E7%B4%A2%E4%B8%8E%E6%B7%B1%E7%A9%B6">对错误提示的摸索与深究</a></li>
+</ul>
 
-    
-        <div class="pagination-container">
-  
-  
-</div>
+              </div>
+            </div>
+          </article>
+        </div>
 
-    
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '8c39c7047df3095f728c',
+    clientSecret: '0144c24ae8894e1635180289be473e963d326154',
+    repo: 'kudoes.coding.me',
+    owner: 'kudoes',
+    admin: ['kudoes'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
   <a class="rss" href="https://kudoes.coding.me/atom.xml" target="_blank">RSS</a>
