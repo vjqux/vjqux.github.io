@@ -1,93 +1,94 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" >
+
 <title>Linux应用 | Gridea</title>
-<meta name="description" content="温故而知新" />
-<link rel="shortcut icon" href="https://kudoes.coding.me/favicon.ico?v=1585650080736">
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://kudoes.coding.me/favicon.ico?v=1585650093256">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://kudoes.coding.me/styles/main.css">
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://kudoes.coding.me">
-  <img class="avatar" src="https://kudoes.coding.me/images/avatar.png?v=1585650080736" alt="">
-  </a>
-  <h1 class="site-title">
-    Gridea
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://kudoes.coding.me">Gridea</a></h3>
   </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              Linux应用
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-01-07
-              </span>
-              <span>
-                1 min read
-              </span>
-              
-            </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h2 id="用户与组">用户与组</h2>
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>Linux应用</h1>
+            <p class="article-meta">
+              2020-01-07
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="用户与组">用户与组</h2>
 <p>使用useradd创建用户时，-g参数表示创建一个相同gid的用户，-G参数表示创建一个不同gid的用户，当该用户的用户组归属于指定的用户组</p>
 <pre><code>shell&gt; useradd -g group1 user2
 # 方法一 /etc/group
@@ -104,72 +105,105 @@ user1:x:1000:1000
 user2:x:1001:1001
 </code></pre>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E7%94%A8%E6%88%B7%E4%B8%8E%E7%BB%84">用户与组</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
             </div>
           </article>
         </div>
-
+        <div class="paper" data-aos="fade-in">
+          
+        </div>
         
+      </div>
 
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://kudoes.coding.me/images/avatar.png?v=1585650093256" class="no-responsive avatar">
+    <div class="text-muted">温故而知新</div>
+    <div class="social-container">
+      
         
-
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://kudoes.coding.me/atom.xml" target="_blank">RSS</a>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://kudoes.coding.me/post/linux-ying-yong/">Linux应用</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kudoes.coding.me/post/ru-he-gou-zao-jian-dan-de-dong-tai-mi-ma/">如何构造简单的动态密码</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kudoes.coding.me/post/guan-yu-esp8266-diao-yong-han-shu-yi-zi-fu-chuan-xing-shi-du-qu-shi-chu-xian-chang-du-cuo-wu-de-wen-ti/">关于ESP8266调用函数以字符串形式读取时出现长度错误的问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kudoes.coding.me/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://kudoes.coding.me/post/hello-gridea/">Hello Gridea</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://kudoes.coding.me/tag/1bMrly8z_/" class="badge secondary">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://kudoes.coding.me/atom.xml" target="_blank">RSS</a>
+  </div>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+    </div>
 
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
+<script type="application/javascript">
 
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+AOS.init();
+
+hljs.initHighlightingOnLoad()
 
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>
