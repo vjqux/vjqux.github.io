@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Gridea | Gridea</title>
+<title>Linux应用 | Gridea</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://kudoes.coding.me">Gridea</a></h3>
@@ -79,42 +80,40 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: Gridea</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://kudoes.coding.me/post/hello-gridea/">Hello Gridea</a>
-    </h2>
-    <p class="article-meta">
-      2018-12-12
-      
-        <a href="https://kudoes.coding.me/tag/1bMrly8z_/" class="badge success">
-          Gridea
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+          <article class="article">
+            <h1>Linux应用</h1>
+            <p class="article-meta">
+              2020-01-07
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="用户与组">用户与组</h2>
+<p>使用useradd创建用户时，-g参数表示创建一个相同gid的用户，-G参数表示创建一个不同gid的用户，当该用户的用户组归属于指定的用户组</p>
+<pre><code>shell&gt; useradd -g group1 user2
+# 方法一 /etc/group
+group1:x:1000:
+# 方法一 /etc/paaswd
+user1:x:1000:1000
+user2:x:1001:1000
+shell&gt; useradd -G group1 user2
+# 方法二 /etc/group, group2与user2同名
+group1:x:1000:group2
+group2:x:1001:
+# 方法二 /etc/passwd
+user1:x:1000:1000
+user2:x:1001:1001
+</code></pre>
 
-    </p>
-    <div class="row">
-      <a href="https://kudoes.coding.me/post/hello-gridea/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://kudoes.coding.me/images/avatar.png?v=1585649637424" class="no-responsive avatar">
@@ -189,6 +188,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://kudoes.coding.me/atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
