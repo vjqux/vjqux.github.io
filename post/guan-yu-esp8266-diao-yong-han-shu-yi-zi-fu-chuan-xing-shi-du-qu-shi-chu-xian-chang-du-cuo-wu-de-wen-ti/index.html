@@ -1,94 +1,93 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>关于ESP8266调用函数以字符串形式读取时出现长度错误的问题 | Gridea</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://kudoes.coding.me/favicon.ico?v=1585649637424">
-
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="https://kudoes.coding.me/favicon.ico?v=1585649651327">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://kudoes.coding.me/styles/main.css">
 
-
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://kudoes.coding.me">Gridea</a></h3>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://kudoes.coding.me">
+  <img class="avatar" src="https://kudoes.coding.me/images/avatar.png?v=1585649651327" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="/" class="menu">
-                首页
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/archives" class="menu">
-                归档
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/tags" class="menu">
-                标签
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/post/about" class="menu">
-                关于
-              </a>
-            
-          </li>
-        
-      </ul>
-    </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
-</nav>
+</div>
 
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>关于ESP8266调用函数以字符串形式读取时出现长度错误的问题</h1>
-            <p class="article-meta">
-              2019-12-29
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              关于ESP8266调用函数以字符串形式读取时出现长度错误的问题
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-12-29
+              </span>
+              <span>
+                2 min read
+              </span>
               
-            </p>
+            </div>
             
-            <div class="post-content">
-              <h1 id="发现问题的契机">发现问题的契机</h1>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="发现问题的契机">发现问题的契机</h1>
 <p>在初次开发ESP8266的过程中，遇到了需要保存信息的情况，本来想通过对spi-flash的读写操作实现，后面看到了SDK的Demo中调用了nvs初始化的相关函数便由此想到是否可以利用封装好的函数进行数据的存取操作，于是才有了问题的产生。<br>
 通过<a href="https://blog.csdn.net/ustccw/article/details/84636394">ESP8266 NVS操作</a>得知具体的NVS函数操作，不用关心操作数据的物理地址以及符合操作习惯的使用方法让我进一步去了解。<br>
 在实际使用过程中发现如果针对给定的字符类型的数据，写入操作返回成功后进行读取会报长度错误<strong>ESP_ERR_NVS_INVALID_LENGTH</strong>，此错误的解释是读取的字符串和存储的长度不一致</p>
@@ -100,105 +99,70 @@
 <h1 id="总结">总结</h1>
 <p>对于字符串类型这种在写入时没有传入长度参数的数据的读写，最佳操作是在读取前先传入空指针读取存储区域中的数据长度信息，然后传入存放输出数据的指针以及获取的长度值，这样做就不用担心传入的字符串是否对齐。</p>
 
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%A5%91%E6%9C%BA">发现问题的契机</a></li>
+<li><a href="#%E5%AF%B9%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA%E7%9A%84%E6%91%B8%E7%B4%A2%E4%B8%8E%E6%B7%B1%E7%A9%B6">对错误提示的摸索与深究</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+
+              </div>
             </div>
           </article>
         </div>
-        <div class="paper" data-aos="fade-in">
-          
-        </div>
-        
-      </div>
 
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://kudoes.coding.me/images/avatar.png?v=1585649637424" class="no-responsive avatar">
-    <div class="text-muted">温故而知新</div>
-    <div class="social-container">
-      
         
-      
+
         
-      
-        
-      
-        
-      
-        
-      
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="https://kudoes.coding.me/post/linux-ying-yong/">Linux应用</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://kudoes.coding.me/post/ru-he-gou-zao-jian-dan-de-dong-tai-mi-ma/">如何构造简单的动态密码</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://kudoes.coding.me/post/guan-yu-esp8266-diao-yong-han-shu-yi-zi-fu-chuan-xing-shi-du-qu-shi-chu-xian-chang-du-cuo-wu-de-wen-ti/">关于ESP8266调用函数以字符串形式读取时出现长度错误的问题</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://kudoes.coding.me/post/about/">关于</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://kudoes.coding.me/post/hello-gridea/">Hello Gridea</a>
-            </li>
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-        <a href="https://kudoes.coding.me/tag/1bMrly8z_/" class="badge secondary">
-          Gridea
-        </a>
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://kudoes.coding.me/atom.xml" target="_blank">RSS</a>
-  </div>
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://kudoes.coding.me/atom.xml" target="_blank">RSS</a>
 </div>
 
+<script>
+  hljs.initHighlightingOnLoad()
 
-    </div>
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
 
-<script type="application/javascript">
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
 
-AOS.init();
-
-hljs.initHighlightingOnLoad()
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
 
 </script>
 
-
-
-
+      </div>
+    </div>
   </body>
 </html>
