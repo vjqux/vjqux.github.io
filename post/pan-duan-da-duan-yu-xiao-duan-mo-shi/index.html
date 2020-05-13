@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于ESP8266调用函数以字符串形式读取时出现长度错误的问题 | Gridea</title>
+<title>判断大端与小端模式 | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://kudoes.coding.me/favicon.ico?v=1589351502767">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,45 +73,66 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于ESP8266调用函数以字符串形式读取时出现长度错误的问题
+              判断大端与小端模式
             </h2>
             <div class="post-info">
               <span>
-                2019-12-29
+                2020-05-13
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="发现问题的契机">发现问题的契机</h1>
-<p>在初次开发ESP8266的过程中，遇到了需要保存信息的情况，本来想通过对spi-flash的读写操作实现，后面看到了SDK的Demo中调用了nvs初始化的相关函数便由此想到是否可以利用封装好的函数进行数据的存取操作，于是才有了问题的产生。<br>
-通过<a href="https://blog.csdn.net/ustccw/article/details/84636394">ESP8266 NVS操作</a>得知具体的NVS函数操作，不用关心操作数据的物理地址以及符合操作习惯的使用方法让我进一步去了解。<br>
-在实际使用过程中发现如果针对给定的字符类型的数据，写入操作返回成功后进行读取会报长度错误<strong>ESP_ERR_NVS_INVALID_LENGTH</strong>，此错误的解释是读取的字符串和存储的长度不一致</p>
-<h1 id="对错误提示的摸索与深究">对错误提示的摸索与深究</h1>
-<p>错误提示让我把关注点引到了字符串的数据长度上来，于是乎在后续几次实验中多次调整字符串的长度后发现对于写入的数据为4字节对齐的字符串能够顺利读取，否则汇报0x110c的错误码。<br>
-结合<a href="https://blog.csdn.net/jasper_JA/article/details/102915660">ESP32学习笔记</a>这篇博客，知道了如何正确读取存储在NVS的信息。<br>
-令我没有想到的是，输入读取函数的长度参数指针不只是用来存放读取的数据长度的，当传入的数据指针有效时，NVS读取函数会根据传入的长度参数读取相应长度字符数据。<br>
-也就是说报错的原因在于传入的长度参数有误导致的，不过也有例外，当存放的数据刚好满足4字节对齐的条件时也可以正确读取。</p>
-<h1 id="总结">总结</h1>
-<p>对于字符串类型这种在写入时没有传入长度参数的数据的读写，最佳操作是在读取前先传入空指针读取存储区域中的数据长度信息，然后传入存放输出数据的指针以及获取的长度值，这样做就不用担心传入的字符串是否对齐。</p>
+                <pre><code>typedef struct {
+    uint32_t h1:4;
+    uint32_t h2:4;
+    uint32_t h3:4;
+    uint32_t h4:4;
+} HalfByte;
+
+/*
+ 如果是小端（比特序）模式，则输出结果为：
+    h1 = 04
+    h2 = 03
+    h3 = 02
+    h4 = 01
+ 如果是大端（网络字节序）模式，则输出结果为：
+    h1 = 01
+    h2 = 02
+    h3 = 03
+    h4 = 04
+*/
+void VerifyEndian(void) {
+    uint16_t data = 0x1234;
+    HalfByte *hb = (HalfByte *)&amp;data;
+    printf(&quot;h1 = %02Xr\n&quot;, hb-&gt;h1);
+    printf(&quot;h2 = %02X\r\n&quot;, hb-&gt;h2);
+    printf(&quot;h3 = %02X\r\n&quot;, hb-&gt;h3);
+    printf(&quot;h4 = %02X\r\n&quot;, hb-&gt;h4);
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98%E7%9A%84%E5%A5%91%E6%9C%BA">发现问题的契机</a></li>
-<li><a href="#%E5%AF%B9%E9%94%99%E8%AF%AF%E6%8F%90%E7%A4%BA%E7%9A%84%E6%91%B8%E7%B4%A2%E4%B8%8E%E6%B7%B1%E7%A9%B6">对错误提示的摸索与深究</a></li>
-<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://kudoes.coding.me/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
         
 
         

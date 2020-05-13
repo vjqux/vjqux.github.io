@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://kudoes.coding.me</id>
     <title>Gridea</title>
-    <updated>2020-03-31T10:25:01.578Z</updated>
+    <updated>2020-05-13T06:31:59.254Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://kudoes.coding.me"/>
     <link rel="self" href="https://kudoes.coding.me/atom.xml"/>
@@ -10,6 +10,42 @@
     <logo>https://kudoes.coding.me/images/avatar.png</logo>
     <icon>https://kudoes.coding.me/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[判断大端与小端模式]]></title>
+        <id>https://kudoes.coding.me/post/pan-duan-da-duan-yu-xiao-duan-mo-shi/</id>
+        <link href="https://kudoes.coding.me/post/pan-duan-da-duan-yu-xiao-duan-mo-shi/">
+        </link>
+        <updated>2020-05-13T06:15:15.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>typedef struct {
+    uint32_t h1:4;
+    uint32_t h2:4;
+    uint32_t h3:4;
+    uint32_t h4:4;
+} HalfByte;
+
+/*
+ 如果是小端（比特序）模式，则输出结果为：
+    h1 = 04
+    h2 = 03
+    h3 = 02
+    h4 = 01
+ 如果是大端（网络字节序）模式，则输出结果为：
+    h1 = 01
+    h2 = 02
+    h3 = 03
+    h4 = 04
+*/
+void VerifyEndian(void) {
+    uint16_t data = 0x1234;
+    HalfByte *hb = (HalfByte *)&amp;data;
+    printf(&quot;h1 = %02Xr\n&quot;, hb-&gt;h1);
+    printf(&quot;h2 = %02X\r\n&quot;, hb-&gt;h2);
+    printf(&quot;h3 = %02X\r\n&quot;, hb-&gt;h3);
+    printf(&quot;h4 = %02X\r\n&quot;, hb-&gt;h4);
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://kudoes.coding.me/post/hello-gridea/</id>
