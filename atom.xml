@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://kudoes.coding.me</id>
+    <id>https://vjqux.github.io</id>
     <title>Gridea</title>
-    <updated>2020-05-13T06:36:45.432Z</updated>
+    <updated>2020-05-20T03:19:44.108Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://kudoes.coding.me"/>
-    <link rel="self" href="https://kudoes.coding.me/atom.xml"/>
+    <link rel="alternate" href="https://vjqux.github.io"/>
+    <link rel="self" href="https://vjqux.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
-    <logo>https://kudoes.coding.me/images/avatar.png</logo>
-    <icon>https://kudoes.coding.me/favicon.ico</icon>
+    <logo>https://vjqux.github.io/images/avatar.png</logo>
+    <icon>https://vjqux.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[判断大端与小端模式]]></title>
-        <id>https://kudoes.coding.me/post/pan-duan-da-duan-yu-xiao-duan-mo-shi/</id>
-        <link href="https://kudoes.coding.me/post/pan-duan-da-duan-yu-xiao-duan-mo-shi/">
+        <id>https://vjqux.github.io/post/pan-duan-da-duan-yu-xiao-duan-mo-shi/</id>
+        <link href="https://vjqux.github.io/post/pan-duan-da-duan-yu-xiao-duan-mo-shi/">
         </link>
         <updated>2020-05-13T06:15:15.000Z</updated>
         <content type="html"><![CDATA[<pre><code>typedef struct {
-    uint32_t h1:4;
-    uint32_t h2:4;
-    uint32_t h3:4;
-    uint32_t h4:4;
+    uint16_t h1:4;
+    uint16_t h2:4;
+    uint16_t h3:4;
+    uint16_t h4:4;
 } HalfByte;
+
+typedef union {
+    uint16_t half_word;
+    uint8_t low_addr_byte;
+} ShareLowAddrByte;
 
 /*
  如果是小端（比特序）模式，则输出结果为：
@@ -29,27 +34,32 @@
     h2 = 03
     h3 = 02
     h4 = 01
+    low addr byte: 34
  如果是大端（网络字节序）模式，则输出结果为：
     h1 = 01
     h2 = 02
     h3 = 03
     h4 = 04
+    low addr byte: 12
 */
 void VerifyEndian(void) {
     uint16_t data = 0x1234;
     HalfByte *hb = (HalfByte *)&amp;data;
+    ShareLowAddrByte *lb = (ShareLowAddrByte)&amp;data;
     printf(&quot;h1 = %02Xr\n&quot;, hb-&gt;h1);
     printf(&quot;h2 = %02X\r\n&quot;, hb-&gt;h2);
     printf(&quot;h3 = %02X\r\n&quot;, hb-&gt;h3);
     printf(&quot;h4 = %02X\r\n&quot;, hb-&gt;h4);
+
+    printf(&quot;low addr byte: %02X\r\n&quot;, lb-&gt;low_addr_byte);
 }
 </code></pre>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://kudoes.coding.me/post/hello-gridea/</id>
-        <link href="https://kudoes.coding.me/post/hello-gridea/">
+        <id>https://vjqux.github.io/post/hello-gridea/</id>
+        <link href="https://vjqux.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
