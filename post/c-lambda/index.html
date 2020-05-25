@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>如何构造简单的动态密码 | Gridea</title>
+<title>C++ Lambda | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://vjqux.github.io/favicon.ico?v=1590370006707">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,11 +73,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              如何构造简单的动态密码
+              C++ Lambda
             </h2>
             <div class="post-info">
               <span>
-                2019-12-29
+                2020-05-25
               </span>
               <span>
                 1 min read
@@ -87,31 +87,42 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="背景">背景</h1>
-<p>在刚接触到动态密码这个概念的时候，了解到的主流动态密码算法有两种，一种是HOTP，另一种是TOTP</p>
-<h2 id="步骤">步骤</h2>
-<h3 id="数据压缩">数据压缩</h3>
-<p>试想压缩信息，尽可能排除无用信息</p>
+                <p>高阶函数<br>
+<a href="https://docs.microsoft.com/zh-cn/cpp/cpp/examples-of-lambda-expressions?view=vs-2019">ms示例</a></p>
+<pre><code class="language-C++">// 显示返回function对象的lambda和采用function对象作为其参数的lambda
+int main() {
+    using namespace std;
+    auto addtwointegers = [](int x) -&gt; function&lt;int(int)&gt; {
+        return [=](int y) {return x + y；}；
+    }
+
+    auto higerorder = [](const function&lt;int(int)&gt;&amp; f, int z) {
+        return fj(z) * 2;
+    }
+
+    auto answer = higerorder (addtwointegers(7), 8);
+
+    cout&lt;&lt;answer&lt;&lt;endl;
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#%E8%83%8C%E6%99%AF">背景</a>
-<ul>
-<li><a href="#%E6%AD%A5%E9%AA%A4">步骤</a>
-<ul>
-<li><a href="#%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9">数据压缩</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://vjqux.github.io/post/pan-duan-da-duan-yu-xiao-duan-mo-shi/">
+              <h3 class="post-title">
+                判断大端与小端模式
+              </h3>
+            </a>
+          </div>
         
 
         
