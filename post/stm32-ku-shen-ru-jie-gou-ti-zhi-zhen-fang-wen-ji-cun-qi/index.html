@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | Gridea</title>
+<title>STM32库深入：结构体指针访问寄存器 | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="https://vjqux.github.io/favicon.ico?v=1590223334313">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,54 +73,73 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Hello Gridea
+              STM32库深入：结构体指针访问寄存器
             </h2>
             <div class="post-info">
               <span>
-                2018-12-12
+                2020-03-31
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
-              
-                <a href="https://vjqux.github.io/tag/1bMrly8z_/" class="post-tag">
-                  # Gridea
-                </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://vjqux.github.io/post-images/hello-gridea.png" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                <p>摘抄自STM32的标准库</p>
+<pre><code class="language-C">/* 定义只写和读写的寄存器类型 */
+#define     __O     volatile       
+#define     __IO    volatile       
+
+/* 用结构体定义GPIO寄存器 */
+typedef struct
+{
+  __IO uint32_t MODER;       
+  __IO uint32_t OTYPER;      
+  __IO uint32_t OSPEEDR;     
+  __IO uint32_t PUPDR;       
+  __IO uint32_t IDR;
+  __IO uint32_t ODR;   
+  __IO uint32_t BSRR; 
+  __IO uint32_t LCKR;
+  __IO uint32_t AFR[2];
+  __IO uint32_t BRR;
+} GPIO_TypeDef;
+
+/* 定于GPIO寄存器的地址 */
+#define GPIOA_BASE            (AHB2PERIPH_BASE + 0x00000000UL)
+#define GPIOB_BASE            (AHB2PERIPH_BASE + 0x00000400UL)
+#define GPIOC_BASE            (AHB2PERIPH_BASE + 0x00000800UL)
+#define GPIOD_BASE            (AHB2PERIPH_BASE + 0x00000C00UL)
+#define GPIOF_BASE            (AHB2PERIPH_BASE + 0x00001400UL)
+
+/* *将寄存器地址转化为结构体指针 */
+#define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+#define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+#define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+#define GPIOD               ((GPIO_TypeDef *) GPIOD_BASE)
+#define GPIOF               ((GPIO_TypeDef *) GPIOF_BASE)
+</code></pre>
+<h3 id="指针的定义对指针使用const">指针的定义：对指针使用const</h3>
+<ul>
+<li><code>int const *</code> - pointer to const int</li>
+<li><code>int * const</code> - const pointer to int</li>
+<li><code>int * const * const</code> - a const pointer to a const pointer to an int<br>
+相等的情况</li>
+<li><code>const * int</code> == <code>int const *</code></li>
+</ul>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
+<li>
+<ul>
+<li><a href="#%E6%8C%87%E9%92%88%E7%9A%84%E5%AE%9A%E4%B9%89%E5%AF%B9%E6%8C%87%E9%92%88%E4%BD%BF%E7%94%A8const">指针的定义：对指针使用const</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -130,6 +149,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://vjqux.github.io/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
         
 
         

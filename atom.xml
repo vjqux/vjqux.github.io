@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://vjqux.github.io</id>
     <title>Gridea</title>
-    <updated>2020-05-20T06:29:59.715Z</updated>
+    <updated>2020-05-25T00:33:42.643Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://vjqux.github.io"/>
     <link rel="self" href="https://vjqux.github.io/atom.xml"/>
@@ -54,6 +54,56 @@ void VerifyEndian(void) {
     printf(&quot;low addr byte: %02X\r\n&quot;, lb-&gt;low_addr_byte);
 }
 </code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[STM32库深入：结构体指针访问寄存器]]></title>
+        <id>https://vjqux.github.io/post/stm32-ku-shen-ru-jie-gou-ti-zhi-zhen-fang-wen-ji-cun-qi/</id>
+        <link href="https://vjqux.github.io/post/stm32-ku-shen-ru-jie-gou-ti-zhi-zhen-fang-wen-ji-cun-qi/">
+        </link>
+        <updated>2020-03-31T03:50:45.000Z</updated>
+        <content type="html"><![CDATA[<p>摘抄自STM32的标准库</p>
+<pre><code class="language-C">/* 定义只写和读写的寄存器类型 */
+#define     __O     volatile       
+#define     __IO    volatile       
+
+/* 用结构体定义GPIO寄存器 */
+typedef struct
+{
+  __IO uint32_t MODER;       
+  __IO uint32_t OTYPER;      
+  __IO uint32_t OSPEEDR;     
+  __IO uint32_t PUPDR;       
+  __IO uint32_t IDR;
+  __IO uint32_t ODR;   
+  __IO uint32_t BSRR; 
+  __IO uint32_t LCKR;
+  __IO uint32_t AFR[2];
+  __IO uint32_t BRR;
+} GPIO_TypeDef;
+
+/* 定于GPIO寄存器的地址 */
+#define GPIOA_BASE            (AHB2PERIPH_BASE + 0x00000000UL)
+#define GPIOB_BASE            (AHB2PERIPH_BASE + 0x00000400UL)
+#define GPIOC_BASE            (AHB2PERIPH_BASE + 0x00000800UL)
+#define GPIOD_BASE            (AHB2PERIPH_BASE + 0x00000C00UL)
+#define GPIOF_BASE            (AHB2PERIPH_BASE + 0x00001400UL)
+
+/* *将寄存器地址转化为结构体指针 */
+#define GPIOA               ((GPIO_TypeDef *) GPIOA_BASE)
+#define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+#define GPIOC               ((GPIO_TypeDef *) GPIOC_BASE)
+#define GPIOD               ((GPIO_TypeDef *) GPIOD_BASE)
+#define GPIOF               ((GPIO_TypeDef *) GPIOF_BASE)
+</code></pre>
+<h3 id="指针的定义对指针使用const">指针的定义：对指针使用const</h3>
+<ul>
+<li><code>int const *</code> - pointer to const int</li>
+<li><code>int * const</code> - const pointer to int</li>
+<li><code>int * const * const</code> - a const pointer to a const pointer to an int<br>
+相等的情况</li>
+<li><code>const * int</code> == <code>int const *</code></li>
+</ul>
 ]]></content>
     </entry>
     <entry>
